@@ -38,9 +38,12 @@ jobs:
       - name: Apply small upstream-compatible auth + safety fixes
         run: |
           python watch-iloader/patch_auth.py --iloader vendor/iloader --isideload vendor/isideload
+          if ($LASTEXITCODE -ne 0) { throw "Source patch failed; refusing to build" }
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           git -C vendor/iloader diff --check
+          if ($LASTEXITCODE -ne 0) { throw "iLoader diff check failed" }
           git -C vendor/isideload diff --check
+          if ($LASTEXITCODE -ne 0) { throw "isideload diff check failed" }
           git -C vendor/iloader diff | Out-File -Encoding utf8 dist/iloader-source-changes.diff
           git -C vendor/isideload diff | Out-File -Encoding utf8 dist/isideload-source-changes.diff
           @"
@@ -52,7 +55,9 @@ jobs:
 
       - name: Install front-end dependencies
         working-directory: vendor/iloader
-        run: bun install --frozen-lockfile
+        run: |
+          bun install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw "Bun install failed" }
 
       - name: Build Windows NSIS installer
         working-directory: vendor/iloader
