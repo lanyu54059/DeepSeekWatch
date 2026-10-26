@@ -27,7 +27,7 @@ def run(a,b,manifest):
         );
         Ok(Box::new(FsStorage::new(
             app.path().app_data_dir().map_err(|e| {
-                AppError::Filesystem("Failed to get app data directory: {:?}", e.to_string())
+                AppError::Misc(format!("Failed to get app data directory: {:?}", e))
             })?,
         )))""",
        '        Err(AppError::Keyring("Secure OS keyring unavailable; refusing unsafe filesystem storage.".into()))')
