@@ -1,0 +1,47 @@
+name: DeepSeekWatch
+options:
+  bundleIdPrefix: com.personal.deepseek
+  deploymentTarget:
+    iOS: '17.0'
+    watchOS: '10.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MARKETING_VERSION: '1.0.0'
+    CURRENT_PROJECT_VERSION: 1
+    CODE_SIGN_STYLE: Automatic
+    GENERATE_INFOPLIST_FILE: YES
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+targets:
+  DeepSeekPhone:
+    type: application
+    platform: iOS
+    sources: [DeepSeekPhone, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.personal.deepseek.phone
+        TARGETED_DEVICE_FAMILY: '1,2'
+        INFOPLIST_KEY_CFBundleDisplayName: DeepSeek Watch
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+    dependencies:
+      - target: DeepSeekWatch
+        embed: true
+        codeSign: false
+  DeepSeekWatch:
+    type: application
+    platform: watchOS
+    sources: [DeepSeekWatch, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.personal.deepseek.phone.watchkitapp
+        INFOPLIST_KEY_CFBundleDisplayName: DeepSeek Watch
+        INFOPLIST_KEY_WKApplication: YES
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.personal.deepseek.phone
+        INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
+        TARGETED_DEVICE_FAMILY: '4'
+schemes:
+  DeepSeekPhone:
+    build:
+      targets:
+        DeepSeekPhone: all

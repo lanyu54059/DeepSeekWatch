@@ -1,0 +1,54 @@
+name: Build DeepSeek Watch
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain and SDKs
+        run: |
+          mkdir -p dist
+          set -o pipefail
+          { xcodebuild -version; xcodebuild -showsdks; } 2>&1 | tee dist/toolchain.log
+      - name: Generate project and icons
+        run: |
+          set -o pipefail
+          bash Scripts/generate.sh 2>&1 | tee dist/generate.log
+      - name: Test API contract
+        run: |
+          set -o pipefail
+          swiftc DeepSeekWatch/DeepSeekClient.swift Tests/ClientTests.swift -o /tmp/deepseek-client-tests
+          /tmp/deepseek-client-tests 2>&1 | tee dist/tests.log
+          python3 -m unittest discover -s Tests -p 'test_*.py' -v 2>&1 | tee dist/packaging-tests.log
+      - name: Build unsigned iPhone and embedded Watch application
+        run: |
+          set -o pipefail
+          xcodebuild -project DeepSeekWatch.xcodeproj -scheme DeepSeekPhone \
+            -configuration Release -destination 'generic/platform=iOS' \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
+            build 2>&1 | tee dist/build.log
+      - name: Validate and package real products
+        run: |
+          set -o pipefail
+          python3 Scripts/package.py build/Build/Products/Release-iphoneos/DeepSeekPhone.app dist 2>&1 | tee dist/package.log
+          ditto -c -k --keepParent build/Build/Products dist/DeepSeekWatch-build.zip
+          ditto -c -k --keepParent DeepSeekWatch.xcodeproj dist/DeepSeekWatch-xcodeproj.zip
+      - name: Preserve products even when validation fails
+        if: failure()
+        run: |
+          if [ -d build/Build/Products ]; then
+            ditto -c -k --keepParent build/Build/Products dist/DeepSeekWatch-failed-products.zip
+          fi
+      - name: Upload artifacts and complete logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeepSeekWatch-unsigned-${{ github.run_number }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
