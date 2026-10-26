@@ -1,0 +1,85 @@
+name: Build Watch iLoader with Apple login fix
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/iloader-watch-auth.yml'
+      - 'Scripts/patch_iloader_watch_auth.py'
+      - 'tools/iloader-watch-auth/**'
+permissions:
+  contents: read
+jobs:
+  windows-watch-iloader:
+    runs-on: windows-2022
+    timeout-minutes: 110
+    steps:
+      - name: Checkout patch definitions
+        uses: actions/checkout@v4
+      - name: Fetch pinned Rzbck Watch sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _watchbuild/iloader _watchbuild/isideload dist
+          git -C _watchbuild/iloader init
+          git -C _watchbuild/iloader fetch --no-tags --depth 1 https://github.com/Rzbck/iloader.git 70f37e9b4afc659ab44ec1944c034093f4cda416
+          git -C _watchbuild/iloader checkout --detach FETCH_HEAD
+          git -C _watchbuild/isideload init
+          git -C _watchbuild/isideload fetch --no-tags --depth 1 https://github.com/Rzbck/isideload.git f7b9f3da570edd6824c29680545e710846d07df5
+          git -C _watchbuild/isideload checkout --detach FETCH_HEAD
+          test "$(git -C _watchbuild/iloader rev-parse HEAD)" = 70f37e9b4afc659ab44ec1944c034093f4cda416
+          test "$(git -C _watchbuild/isideload rev-parse HEAD)" = f7b9f3da570edd6824c29680545e710846d07df5
+          git -C _watchbuild/iloader rev-parse HEAD > dist/iloader-original-sha.txt
+          git -C _watchbuild/isideload rev-parse HEAD > dist/isideload-original-sha.txt
+      - name: Patch Apple login 503 preserving Watch implementation
+        shell: pwsh
+        run: |
+          python Scripts/patch_iloader_watch_auth.py --iloader _watchbuild/iloader --isideload _watchbuild/isideload --manifest dist/patch-manifest.json
+          if ($LASTEXITCODE -ne 0) { throw "Strict source patch failed" }
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Windows build dependencies
+        shell: pwsh
+        run: |
+          choco install strawberryperl make --no-progress -y
+          if ($LASTEXITCODE -ne 0) { throw "Dependency installation failed" }
+      - name: Install frontend dependencies
+        working-directory: _watchbuild/iloader
+        shell: pwsh
+        run: |
+          bun install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw "Bun install failed" }
+      - name: Build unsigned Windows installer
+        working-directory: _watchbuild/iloader
+        shell: pwsh
+        run: |
+          bun tauri build --config src-tauri/ci.conf.json 2>&1 | Tee-Object -FilePath "$env:GITHUB_WORKSPACE/dist/tauri-build.log"
+          if ($LASTEXITCODE -ne 0) { throw "Tauri Windows build failed" }
+      - name: Verify and stage setup executable
+        shell: pwsh
+        run: |
+          $exes = @(Get-ChildItem '_watchbuild/iloader/src-tauri/target/release/bundle' -Recurse -File -Filter '*setup.exe')
+          if ($exes.Count -eq 0) { throw "No compiled setup EXE" }
+          $exe = $exes | Select-Object -First 1
+          if ($exe.Length -lt 1000000) { throw "Installer unexpectedly small" }
+          Copy-Item $exe.FullName dist/iloader-watch-503-fixed-x64-setup.exe
+          (Get-FileHash dist/iloader-watch-503-fixed-x64-setup.exe -Algorithm SHA256).Hash | Out-File dist/exe-sha256.txt -Encoding ascii
+      - name: Upload Windows EXE and verification data
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iLoader-Watch-Auth503-Fixed-Windows
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload build diagnostics if failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iLoader-Watch-Auth503-Build-Diagnostics
+          path: dist/
+          if-no-files-found: ignore
+          retention-days: 14
