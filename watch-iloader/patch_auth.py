@@ -156,7 +156,20 @@ def patch_account(src: str) -> str:
         return Err(AppError::Misc("Windows Credential Manager is unavailable; login refused".into()));
     }
     let account = login(&handle, &window, &email, &password, anisette_server).await?;'''
-    return replace_once(src, needle, replacement, "login secure storage guard")
+    if src.count(needle) != 2:
+        raise ValueError(f"login secure storage guard: expected two login calls, found {src.count(needle)}")
+    return src.replace(needle, replacement)
+
+def patch_tauri_config(src: str) -> str:
+    # The pinned fork enables Tauri updater bundles, which demand a *separate*
+    # update-signing private key. We disabled auto-update above to preserve Watch
+    # support; therefore no updater artifacts should be built or signed.
+    return replace_once(
+        src,
+        '"createUpdaterArtifacts": true',
+        '"createUpdaterArtifacts": false',
+        "disable updater signing artifacts",
+    )
 
 def run(iloader: pathlib.Path, isideload: pathlib.Path) -> None:
     edit(isideload, "isideload/src/anisette/remote_v3/mod.rs", patch_client)
@@ -167,9 +180,10 @@ def run(iloader: pathlib.Path, isideload: pathlib.Path) -> None:
     edit(iloader, "src-tauri/src/secure_storage.rs", patch_secure_storage)
     edit(iloader, "src-tauri/src/account.rs", patch_account)
     edit(iloader, "src/App.tsx", patch_disable_auto_updates)
+    edit(iloader, "src-tauri/tauri.conf.json", patch_tauri_config)
     assert 'mac-ani.jkcoxson.com' in (iloader / 'src/AppleID.tsx').read_text()
     assert '/v3/client_info' in (isideload / 'isideload/src/anisette/remote_v3/mod.rs').read_text()
-    print("PASS: eight pinned-source patch checks")
+    print("PASS: nine pinned-source patch checks")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
