@@ -74,7 +74,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: iLoader-Watch-AuthFix-Windows-\${{ github.run_number }}
+          name: iLoader-Watch-AuthFix-Windows-${{ github.run_number }}
           path: dist/
           if-no-files-found: warn
           retention-days: 14
