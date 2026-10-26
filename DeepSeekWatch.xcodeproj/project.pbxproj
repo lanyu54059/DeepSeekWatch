@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23043403F9010CE195D72199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9D538A7937BE85EFF0E21B6 /* Assets.xcassets */; };
+		27383D08A528061A0381333B /* DeepSeekWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0100BD85E3D09FAD1080F22B /* DeepSeekWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		312EAE44ABCA5F98A46E45FC /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F4F1DC5B4957E064421AC9 /* Keychain.swift */; };
+		4B00CD4BA8EF158A6B69464C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC7D281B5BBA165C8F0A96 /* Configuration.swift */; };
+		9E983F2120AC3D64F4ACF4B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C51EB9B9C231C68160E6EF42 /* Assets.xcassets */; };
+		ABE68C54844F6BBB844CBFAD /* ChatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89344E5D545450DCC4DBD0DE /* ChatStore.swift */; };
+		AD2B3422ED13C227F35FC184 /* DeepSeekClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795073B89FD9C76CCF06CBD /* DeepSeekClient.swift */; };
+		B28B4D0FB6C92E34C722C312 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F4F1DC5B4957E064421AC9 /* Keychain.swift */; };
+		CD6F63A84D12BCD14102A8CB /* DeepSeekPhoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66742F921D2B58629B4D73E /* DeepSeekPhoneApp.swift */; };
+		D496EFAE7DB6F108C81627E3 /* DeepSeekWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3C61F9ECD2881C275A639 /* DeepSeekWatchApp.swift */; };
+		E281D730D03EF83D4DB32BC4 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC7D281B5BBA165C8F0A96 /* Configuration.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4940113C1A38819587ED54B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43CC57B99E6AD6A091F6EADC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3773871DDC48636E100A2A22;
+			remoteInfo = DeepSeekWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		959550243BC15A39C5A548DD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				27383D08A528061A0381333B /* DeepSeekWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0100BD85E3D09FAD1080F22B /* DeepSeekWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepSeekWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2795073B89FD9C76CCF06CBD /* DeepSeekClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSeekClient.swift; sourceTree = "<group>"; };
+		7ED3C61F9ECD2881C275A639 /* DeepSeekWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSeekWatchApp.swift; sourceTree = "<group>"; };
+		853D9952224E2C8658B28322 /* DeepSeekPhone.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DeepSeekPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87BC7D281B5BBA165C8F0A96 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		89344E5D545450DCC4DBD0DE /* ChatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStore.swift; sourceTree = "<group>"; };
+		A66742F921D2B58629B4D73E /* DeepSeekPhoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSeekPhoneApp.swift; sourceTree = "<group>"; };
+		C51EB9B9C231C68160E6EF42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9D538A7937BE85EFF0E21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D8F4F1DC5B4957E064421AC9 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0126FE3B7FC3F90E864FC560 = {
+			isa = PBXGroup;
+			children = (
+				F84C04F05892FA32CBAFDCB6 /* DeepSeekPhone */,
+				9DFCE246AB538C64AA788E7D /* DeepSeekWatch */,
+				A7F787F433A4D06CFEB845FF /* Shared */,
+				87A2E888B1DE674F4B7C5063 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		87A2E888B1DE674F4B7C5063 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				853D9952224E2C8658B28322 /* DeepSeekPhone.app */,
+				0100BD85E3D09FAD1080F22B /* DeepSeekWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9DFCE246AB538C64AA788E7D /* DeepSeekWatch */ = {
+			isa = PBXGroup;
+			children = (
+				C9D538A7937BE85EFF0E21B6 /* Assets.xcassets */,
+				89344E5D545450DCC4DBD0DE /* ChatStore.swift */,
+				2795073B89FD9C76CCF06CBD /* DeepSeekClient.swift */,
+				7ED3C61F9ECD2881C275A639 /* DeepSeekWatchApp.swift */,
+			);
+			path = DeepSeekWatch;
+			sourceTree = "<group>";
+		};
+		A7F787F433A4D06CFEB845FF /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				87BC7D281B5BBA165C8F0A96 /* Configuration.swift */,
+				D8F4F1DC5B4957E064421AC9 /* Keychain.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F84C04F05892FA32CBAFDCB6 /* DeepSeekPhone */ = {
+			isa = PBXGroup;
+			children = (
+				C51EB9B9C231C68160E6EF42 /* Assets.xcassets */,
+				A66742F921D2B58629B4D73E /* DeepSeekPhoneApp.swift */,
+			);
+			path = DeepSeekPhone;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3773871DDC48636E100A2A22 /* DeepSeekWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FA86B9DEE72E8D3BAEF4F1B /* Build configuration list for PBXNativeTarget "DeepSeekWatch" */;
+			buildPhases = (
+				93172E1604C74496289EF211 /* Sources */,
+				D5E12DC6124B5D2FB45B31F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeepSeekWatch;
+			packageProductDependencies = (
+			);
+			productName = DeepSeekWatch;
+			productReference = 0100BD85E3D09FAD1080F22B /* DeepSeekWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		43256059465FD292A984B16A /* DeepSeekPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE149EEF6F19FBF312A0B2D4 /* Build configuration list for PBXNativeTarget "DeepSeekPhone" */;
+			buildPhases = (
+				BEECC5D665A2CAD9B321BC7D /* Sources */,
+				121687F850B3FED12974D8EA /* Resources */,
+				959550243BC15A39C5A548DD /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				841EFA8CECD9F1FD3D65224B /* PBXTargetDependency */,
+			);
+			name = DeepSeekPhone;
+			packageProductDependencies = (
+			);
+			productName = DeepSeekPhone;
+			productReference = 853D9952224E2C8658B28322 /* DeepSeekPhone.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43CC57B99E6AD6A091F6EADC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3773871DDC48636E100A2A22 = {
+						ProvisioningStyle = Automatic;
+					};
+					43256059465FD292A984B16A = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FA01FBD5CC09C5000C130310 /* Build configuration list for PBXProject "DeepSeekWatch" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0126FE3B7FC3F90E864FC560;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 87A2E888B1DE674F4B7C5063 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43256059465FD292A984B16A /* DeepSeekPhone */,
+				3773871DDC48636E100A2A22 /* DeepSeekWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		121687F850B3FED12974D8EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E983F2120AC3D64F4ACF4B8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5E12DC6124B5D2FB45B31F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23043403F9010CE195D72199 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		93172E1604C74496289EF211 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABE68C54844F6BBB844CBFAD /* ChatStore.swift in Sources */,
+				E281D730D03EF83D4DB32BC4 /* Configuration.swift in Sources */,
+				AD2B3422ED13C227F35FC184 /* DeepSeekClient.swift in Sources */,
+				D496EFAE7DB6F108C81627E3 /* DeepSeekWatchApp.swift in Sources */,
+				312EAE44ABCA5F98A46E45FC /* Keychain.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEECC5D665A2CAD9B321BC7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B00CD4BA8EF158A6B69464C /* Configuration.swift in Sources */,
+				CD6F63A84D12BCD14102A8CB /* DeepSeekPhoneApp.swift in Sources */,
+				B28B4D0FB6C92E34C722C312 /* Keychain.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		841EFA8CECD9F1FD3D65224B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3773871DDC48636E100A2A22 /* DeepSeekWatch */;
+			targetProxy = 4940113C1A38819587ED54B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0B5BE98393FCE4B69119CE84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "DeepSeek Watch";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.deepseek.phone;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0F55BAA8166C2C889CD502D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		8BF1FE5805C76C5DDD6C82E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_KEY_CFBundleDisplayName = "DeepSeek Watch";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.personal.deepseek.phone;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.deepseek.phone.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		A187E274157D5BE5FE131AA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_KEY_CFBundleDisplayName = "DeepSeek Watch";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.personal.deepseek.phone;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.deepseek.phone.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		B72E47383F295156B8CC0211 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "DeepSeek Watch";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.deepseek.phone;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F5EFE229EA9A49B6E6480F64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FA86B9DEE72E8D3BAEF4F1B /* Build configuration list for PBXNativeTarget "DeepSeekWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BF1FE5805C76C5DDD6C82E7 /* Debug */,
+				A187E274157D5BE5FE131AA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EE149EEF6F19FBF312A0B2D4 /* Build configuration list for PBXNativeTarget "DeepSeekPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B5BE98393FCE4B69119CE84 /* Debug */,
+				B72E47383F295156B8CC0211 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FA01FBD5CC09C5000C130310 /* Build configuration list for PBXProject "DeepSeekWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5EFE229EA9A49B6E6480F64 /* Debug */,
+				0F55BAA8166C2C889CD502D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43CC57B99E6AD6A091F6EADC /* Project object */;
+}

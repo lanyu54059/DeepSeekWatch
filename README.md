@@ -4,7 +4,7 @@
 
 ## 验证状态
 
-Windows 本地已通过打包校验器的 5 项测试。macOS 编译与实际产物以 [Actions](https://github.com/lanyu54059/DeepSeekWatch/actions) 最新成功运行及 `validation.json` 为准。免费 Apple ID 签名、iPhone 安装、Watch 安装、实机 API 请求均需单独验证；CI 成功不代表这些阶段成功。
+已在 [GitHub Actions 首轮构建](https://github.com/lanyu54059/DeepSeekWatch/actions/runs/40271590438) 成功通过 Xcode 26.6 的 iOS + watchOS 编译、API 合约测试、5 项打包校验器测试及真实 IPA 结构验证，并下载产物在 Windows 再次核对。详见 [验证记录](VALIDATION.md)。免费 Apple ID 签名、iPhone 安装、Watch 安装、实机 API 请求均未验证；CI 成功不代表这些阶段成功。
 
 ## 功能
 
@@ -29,7 +29,7 @@ project.yml       完整 XcodeGen 工程定义
 INSTALL_WINDOWS.md
 ```
 
-采用现代单目标 Watch App：可执行文件在 Watch `.app` 内，无单独 WatchKit `.appex`。iOS 通过目标依赖内嵌 Watch App。完整 `.xcodeproj` 在 macOS 自动生成并上传，不需要 Windows 上运行 Xcode。
+采用现代单目标 Watch App：可执行文件在 Watch `.app` 内，无单独 WatchKit `.appex`。iOS 通过目标依赖内嵌 Watch App。仓库附有首轮 macOS 构建生成的完整 `.xcodeproj` 和基础图标；CI 按 project.yml 重新生成并上传工程，不需要 Windows 上运行 Xcode。
 
 ## 仅使用 Windows 构建
 
