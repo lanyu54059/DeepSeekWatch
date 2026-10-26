@@ -26,3 +26,12 @@
 ## 非阻塞日志提示
 
 构建有“未使用 AppIntents，跳过元数据提取”和 iPad 界面方向提示；均未阻止原生目标编译与打包。工作流也记录第三方 action 的 Node 运行时弃用提示。完整日志随产物提供。
+
+## 2026-10-26：第二次构建的独立产物验证
+
+- [Actions #2（run 40271896706）](https://github.com/lanyu54059/DeepSeekWatch/actions/runs/40271896706)：编译、单元测试、结构校验、打包和产物上传全部成功。
+- [Artifact 12628638465](https://github.com/lanyu54059/DeepSeekWatch/actions/runs/40271896706/artifacts/12628638465) 已实际下载并再次解压检查；Artifact ZIP 的 SHA-256 为 `af1e440005b54ecf327236813e5a24da1da055f619a6cb1e27c4c8698b607a0a`。
+- 内部真实 unsigned IPA 为 278386 字节，SHA-256 为 `55704a432fb32ced259a44d9214aaae492f36c295fe06e8f938d925cc5b51ab6`，ZIP CRC 检查通过，共 14 个条目。
+- 已实际检查 Payload/DeepSeekPhone.app/DeepSeekPhone 与 Watch/DeepSeekWatch.app/DeepSeekWatch 均包含非空 Mach-O 可执行文件及 Assets.car；两应用分别为 iPhoneOS、WatchOS 平台，最低系统为 iOS 17.0 / watchOS 10.0。
+- 标识符为 `com.personal.deepseek.phone`、`com.personal.deepseek.phone.watchkitapp`，Watch 的 `WKCompanionAppBundleIdentifier` 正确指向前者，`WKApplication = true`。采用现代单 Target Watch App，没有独立 .appex。
+- 验证范围止于无签名打包，**不能证明免费 Apple ID 签名或 Windows → iPhone → Apple Watch 实机安装成功**。
