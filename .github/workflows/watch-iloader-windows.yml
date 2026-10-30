@@ -1,0 +1,85 @@
+name: Windows Watch iLoader with Auth Fix
+on:
+  push:
+    branches: [feat/watch-iloader-auth-compat]
+    paths:
+      - ".github/workflows/watch-iloader-windows.yml"
+      - "watch-iloader/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-2025
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.2"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Checkout upstream Watch regression anchors
+        run: |
+          git clone --quiet --filter=blob:none https://github.com/Rzbck/iloader.git vendor/iloader
+          git -C vendor/iloader checkout --quiet --detach 70f37e9b4afc659ab44ec1944c034093f4cda416
+          git clone --quiet --filter=blob:none https://github.com/Rzbck/isideload.git vendor/isideload
+          git -C vendor/isideload checkout --quiet --detach f7b9f3da570edd6824c29680545e710846d07df5
+          if ((git -C vendor/iloader rev-parse HEAD).Trim() -ne "70f37e9b4afc659ab44ec1944c034093f4cda416") { throw "iLoader commit mismatch" }
+          if ((git -C vendor/isideload rev-parse HEAD).Trim() -ne "f7b9f3da570edd6824c29680545e710846d07df5") { throw "isideload commit mismatch" }
+
+      - name: Apply small upstream-compatible auth + safety fixes
+        run: |
+          python watch-iloader/patch_auth.py --iloader vendor/iloader --isideload vendor/isideload
+          if ($LASTEXITCODE -ne 0) { throw "Source patch failed; refusing to build" }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          git -C vendor/iloader diff --check
+          if ($LASTEXITCODE -ne 0) { throw "iLoader diff check failed" }
+          git -C vendor/isideload diff --check
+          if ($LASTEXITCODE -ne 0) { throw "isideload diff check failed" }
+          git -C vendor/iloader diff | Out-File -Encoding utf8 dist/iloader-source-changes.diff
+          git -C vendor/isideload diff | Out-File -Encoding utf8 dist/isideload-source-changes.diff
+          @"
+          Rzbck/iLoader: 70f37e9b4afc659ab44ec1944c034093f4cda416
+          Rzbck/isideload: f7b9f3da570edd6824c29680545e710846d07df5
+          Patch origin: https://github.com/lanyu54059/DeepSeekWatch/tree/feat/watch-iloader-auth-compat/watch-iloader
+          Unsigned Windows executable. No Apple credentials used by CI.
+          "@ | Set-Content -Encoding utf8 dist/SOURCE-PROVENANCE.txt
+
+      - name: Install front-end dependencies
+        working-directory: vendor/iloader
+        run: |
+          bun install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { throw "Bun install failed" }
+
+      - name: Build Windows NSIS installer
+        working-directory: vendor/iloader
+        run: bun tauri build --bundles nsis
+
+      - name: Export Windows executable
+        run: |
+          $files = @(Get-ChildItem vendor/iloader/src-tauri/target/release/bundle/nsis -Filter "*.exe" -File -Recurse)
+          if ($files.Count -ne 1) { throw "Expected one real installer EXE, found $($files.Count)" }
+          Copy-Item $files[0].FullName dist/iLoader-Watch-AuthFix-Windows-x64-setup.exe
+          $exe = Get-Item dist/iLoader-Watch-AuthFix-Windows-x64-setup.exe
+          if ($exe.Length -lt 1000000) { throw "Installer unexpectedly small" }
+          $magic = [System.IO.File]::ReadAllBytes($exe.FullName)[0..1]
+          if ($magic[0] -ne 0x4d -or $magic[1] -ne 0x5a) { throw "Not a Windows PE file" }
+          Get-FileHash $exe.FullName -Algorithm SHA256 | Format-List | Out-File -Encoding utf8 dist/SHA256.txt
+          Get-AuthenticodeSignature $exe.FullName | Select-Object Status,StatusMessage | Format-List | Out-File -Encoding utf8 dist/AUTHENTICODE.txt
+
+      - name: Upload build artifact and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iLoader-Watch-AuthFix-Windows-${{ github.run_number }}
+          path: dist/
+          if-no-files-found: warn
+          retention-days: 14
